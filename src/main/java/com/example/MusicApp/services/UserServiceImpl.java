@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,17 +18,14 @@ public class UserServiceImpl implements UserService{
     private final RoleRepository roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl( UserRepository userRepository,
+                          RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
     @Override
     public User saveUser(User user) {
-        Optional<User> userOptional = userRepository.findUserByUsername(user.getUsername());
-        if(userOptional.isPresent()) {
-            throw new IllegalStateException("User is taken");
-        }
         return userRepository.save(user);
     }
 
@@ -40,15 +36,27 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        User user = userRepository.findByName(username);
-        Role role = roleRepository.findByName(roleName);
-        user.getRoles().add(role);
+
     }
 
     @Override
-    public Optional<User> getUser(String username) {
-        return userRepository.findUserByUsername(username);
+    public User getUser(String username) {
+        return null;
     }
+
+    //TODO:Throwing Errors from User Repository with User findByName(String username) it is commented out for now
+
+//    @Override
+//    public void addRoleToUser(String username, String roleName) {
+//        User user = userRepository.findByName(username);
+//        Role role = roleRepository.findByName(roleName);
+//        user.getRoles().add(role);
+//    }
+
+//    @Override
+//    public User getUser(String username) {
+//        return userRepository.findByName(username);
+//    }
 
     @Override
     public List<User> getAllUsers() {
