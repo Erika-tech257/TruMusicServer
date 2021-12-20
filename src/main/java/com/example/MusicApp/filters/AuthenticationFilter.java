@@ -60,12 +60,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
 
-        response.setHeader("accessToken", accessToken);
-        response.setHeader("refreshToken", refreshToken);
-//        Map<String, String> tokens = new HashMap<>();
-//        tokens.put("accessToken", accessToken);
-//        tokens.put("refreshToken", refreshToken);
-//        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-//        new ObjectMapper().writeValue(response.getOutputStream(), tokens); //will return tokens in a JSON format in the response body
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("accessToken", accessToken);
+        tokens.put("refreshToken", refreshToken);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        new ObjectMapper().writeValue(response.getOutputStream(), tokens); //will return tokens in a JSON format in the response body
     }
 }

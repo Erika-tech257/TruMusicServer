@@ -1,6 +1,7 @@
 package com.example.MusicApp.Security;
 
 import com.example.MusicApp.filters.AuthenticationFilter;
+import com.example.MusicApp.filters.AuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -47,17 +49,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManagerBean());
-//        authenticationFilter.setFilterProcessesUrl("/TruMusic/login");
+        authenticationFilter.setFilterProcessesUrl("/TruMusic/login");
         http
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/TruMusic/login", "/TruMusic/Register").permitAll()
-                .antMatchers(HttpMethod.GET, "/TruMusic/**").hasAnyAuthority("ROLE_USER")
+                .authorizeRequests().antMatchers("/TruMusic/login/**", "/TruMusic/Register/**", "/TruMusic/refreshToken").permitAll()
+                 .antMatchers(HttpMethod.GET, "/TruMusic/**").hasAnyAuthority("ROLE_USER")
                 .antMatchers(HttpMethod.POST, "/TruMusic/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new AuthenticationFilter(authenticationManagerBean()));
+                .addFilter(authenticationFilter)
+                .addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
