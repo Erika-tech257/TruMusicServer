@@ -22,19 +22,5 @@ public class MusicAppApplication {
 		SpringApplication.run(MusicAppApplication.class, args);
 	}
 
-	CommandLineRunner runner(UserService userService) {
-		return args -> {
-			userService.saveRole(new Role(null, "ROLE_USER"));
-			userService.saveRole(new Role(null, "ROLE_ADMIN"));
-
-			userService.saveUser(new User(null, "JillScott@email.com", "JillyFromPhilly", "password", new ArrayList<>()));
-			userService.saveUser(new User(null, "SummerWalker@email.com", "Summer", "password", new ArrayList<>()));
-			userService.saveUser(new User(null, "ToniBraxton@email.com", "Toni", "password", new ArrayList<>()));
-
-			userService.addRoleToUser("JillyFromPhilly", "ROLE_ADMIN");
-			userService.addRoleToUser("Summer", "ROLE_USER");
-			userService.addRoleToUser("Toni", "ROLE_USER");
-		};
-	}
 
 }

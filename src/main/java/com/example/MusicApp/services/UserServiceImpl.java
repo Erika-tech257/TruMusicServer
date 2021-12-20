@@ -9,9 +9,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,12 +22,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl( UserRepository userRepository,
-                          RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                           RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     //userDetails takes in username, password and authorities
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -57,29 +60,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return roleRepository.save(role);
     }
 
+
     @Override
     public void addRoleToUser(String username, String roleName) {
-
+        User user = userRepository.findByUsername(username);
+        Role role = roleRepository.findByName(roleName);
+        user.getRoles().add(role);
     }
 
     @Override
     public User getUser(String username) {
-        return null;
+        return userRepository.findByUsername(username);
     }
-
-    //TODO:Throwing Errors from User Repository with User findByName(String username) it is commented out for now
-
-//    @Override
-//    public void addRoleToUser(String username, String roleName) {
-//        User user = userRepository.findByName(username);
-//        Role role = roleRepository.findByName(roleName);
-//        user.getRoles().add(role);
-//    }
-
-//    @Override
-//    public User getUser(String username) {
-//        return userRepository.findByName(username);
-//    }
 
     @Override
     public List<User> getAllUsers() {
