@@ -18,5 +18,5 @@ import java.util.List;
         User getUser(String username);
         List<User> getAllUsers();
 
-    }
+}
 

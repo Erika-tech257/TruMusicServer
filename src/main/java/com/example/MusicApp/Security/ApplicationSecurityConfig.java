@@ -54,7 +54,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/TruMusic/login/**", "/TruMusic/Register/**", "/TruMusic/refreshToken").permitAll()
+                .authorizeRequests().antMatchers("/TruMusic/login", "/TruMusic/register").permitAll()
                  .antMatchers(HttpMethod.GET, "/TruMusic/**").hasAnyAuthority("ROLE_USER")
                 .antMatchers(HttpMethod.POST, "/TruMusic/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
