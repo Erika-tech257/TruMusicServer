@@ -30,15 +30,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         this.authenticationManager = authenticationManager;
     }
 
-    //ObjectMapper reads the value from the input stream and inputs it into the LoginAuthenticationRequest class
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
             return authenticationManager.authenticate(authenticationToken);
-
     }
 
     @Override

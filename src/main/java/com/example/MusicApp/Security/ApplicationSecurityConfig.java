@@ -49,13 +49,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManagerBean());
-        authenticationFilter.setFilterProcessesUrl("/TruMusic/login");
+        authenticationFilter.setFilterProcessesUrl("/TruMusic/login/**");
         http
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/TruMusic/login", "/TruMusic/register").permitAll()
-                 .antMatchers(HttpMethod.GET, "/TruMusic/**").hasAnyAuthority("ROLE_USER")
+                .authorizeRequests()
+                .antMatchers("/TruMusic/user/register").permitAll()
+                .antMatchers(HttpMethod.GET, "/TruMusic/**").hasAnyAuthority("ROLE_USER")
                 .antMatchers(HttpMethod.POST, "/TruMusic/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()

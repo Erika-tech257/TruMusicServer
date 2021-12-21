@@ -33,7 +33,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(request.getServletPath().equals("/TruMusic/login") || request.getServletPath().equals("/TruMusic/refreshToken")) {
+        if(request.getServletPath().equals("/TruMusic/login/**") || request.getServletPath().equals("/TruMusic/refreshToken") || request.getServletPath().equals("/TruMusic/user/register")) {
             filterChain.doFilter(request, response);
         } else {
             String authHeader = request.getHeader(AUTHORIZATION);

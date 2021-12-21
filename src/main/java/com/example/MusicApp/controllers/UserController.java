@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/TruMusic")
@@ -44,6 +45,11 @@ public class UserController {
 
     //ResponseEntity represents the whole HTTP response: status code, headers, and body
     //ResponseEntity is generic
+
+    @PostMapping(value = "/login?username={username}&password={password}")
+    public ResponseEntity<User> login(@PathVariable String username){
+        return new ResponseEntity<>(userService.getUser(username), OK);
+    }
 
     @GetMapping(path = "/users")
     public ResponseEntity<List<User>>getAllUsers(){
