@@ -66,15 +66,13 @@ public class UserController {
         return new ResponseEntity<Role>(userService.saveRole(role), HttpStatus.CREATED);
     }
 
-    //not returning a body so just call the build method
-
-    //TODO: CREATE UTIL CLASS FOR TOKEN REDUCE REDUNDANCY
-
     @PostMapping(path = "/role/addToUser")
-    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUser userRole){
+    public ResponseEntity<User>addRoleToUser(@RequestBody RoleToUser userRole){
         userService.addRoleToUser(userRole.getUsername(), userRole.getRoleName());
         return ResponseEntity.ok().build();
     }
+
+    //TODO: CREATE UTIL CLASS FOR TOKEN REDUCE REDUNDANCY
 
     @GetMapping(path = "/refreshToken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response){
