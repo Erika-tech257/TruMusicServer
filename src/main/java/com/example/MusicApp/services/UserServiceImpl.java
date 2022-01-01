@@ -4,6 +4,7 @@ import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
 import com.example.MusicApp.repositories.RoleRepository;
 import com.example.MusicApp.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
@@ -51,30 +53,36 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User saveUser(User user) {
+        log.info("Saving new user {} to the DB", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
     public Role saveRole(Role role) {
+        log.info("Saving new role {} to the DB", role.getName());
         return roleRepository.save(role);
     }
 
 
     @Override
     public void addRoleToUser(String username, String roleName) {
+        log.info("Adding role {} to user {}", roleName, username);
         User user = userRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
+        System.out.println(user.getRoles().add(role)); //returning null
     }
 
     @Override
     public User getUser(String username) {
+        log.info("Fetching user {}", username);
         return userRepository.findByUsername(username);
     }
 
     @Override
     public List<User> getAllUsers() {
+        log.info("Fetching all users");
         return userRepository.findAll();
     }
 
@@ -85,6 +93,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         userRepository.deleteById(userId);
     }
-
 
 }

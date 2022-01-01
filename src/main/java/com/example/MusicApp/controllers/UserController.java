@@ -63,7 +63,7 @@ public class UserController {
 
     @PostMapping(path = "/role/save")
     public ResponseEntity<Role>saveRole(@RequestBody Role role){
-        return new ResponseEntity<Role>(userService.saveRole(role), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.saveRole(role), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/role/addToUser")
@@ -72,7 +72,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    //TODO: CREATE UTIL CLASS FOR TOKEN REDUCE REDUNDANCY
+    //TODO: CREATE UNTIL CLASS FOR TOKEN REDUCE REDUNDANCY
 
     @GetMapping(path = "/refreshToken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response){
