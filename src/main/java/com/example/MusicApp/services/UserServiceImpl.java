@@ -64,15 +64,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return roleRepository.save(role);
     }
 
-
+    //TODO://Role returning null
     @Override
-    public void addRoleToUser(String username, String roleName) {
-        log.info("Adding role {} to user {}", roleName, username);
+    public void addRoleToUser(String username, Integer roleId) {
+        log.info("Adding role {} to user {}", roleId, username);
         User user = userRepository.findByUsername(username);
-        Role role = roleRepository.findByName(roleName);
+        Role role = roleRepository.findByRoleId(roleId);
+//        role.setName(roleName);
+//        user.setUsername(username);
         user.getRoles().add(role);
-        System.out.println(user.getRoles().add(role)); //returning null
+        System.out.println(user.getRoles().add(role));
     }
+
+
 
     @Override
     public User getUser(String username) {
@@ -85,6 +89,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Fetching all users");
         return userRepository.findAll();
     }
+
 
     public void deleteUser(Integer userId) {
         boolean exists = userRepository.existsById(userId);

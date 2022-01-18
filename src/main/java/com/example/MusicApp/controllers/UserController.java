@@ -7,18 +7,16 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
 import com.example.MusicApp.services.UserService;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.OK;
 
+@Slf4j
 @RestController
 @RequestMapping("/TruMusic")
 public class UserController {
@@ -46,19 +42,19 @@ public class UserController {
     //ResponseEntity represents the whole HTTP response: status code, headers, and body
     //ResponseEntity is generic
 
-    @PostMapping(value = "/login?username={username}&password={password}")
+    @PostMapping(value = "/login")
     public ResponseEntity<User> login(@PathVariable String username){
         return new ResponseEntity<>(userService.getUser(username), OK);
     }
 
     @GetMapping(path = "/users")
-    public ResponseEntity<List<User>>getAllUsers(){
-        return ResponseEntity.ok().body(userService.getAllUsers());
+    public List <User> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     @PostMapping(path = "/user/register")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
-        return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/role/save")
@@ -68,9 +64,10 @@ public class UserController {
 
     @PostMapping(path = "/role/addToUser")
     public ResponseEntity<User>addRoleToUser(@RequestBody RoleToUser userRole){
-        userService.addRoleToUser(userRole.getUsername(), userRole.getRoleName());
+        userService.addRoleToUser(userRole.getUsername(), userRole.getRoleId());
         return ResponseEntity.ok().build();
     }
+
 
     //TODO: CREATE UNTIL CLASS FOR TOKEN REDUCE REDUNDANCY
 
@@ -108,10 +105,14 @@ public class UserController {
     }
 }
 //Want the username and roleName and pass it as an object
-//@Data includes getters and setters
+//Basically a DTO
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 class RoleToUser {
     private String username;
-    private String roleName;
+    private Integer roleId; //maybe change to roleId
 }
+
