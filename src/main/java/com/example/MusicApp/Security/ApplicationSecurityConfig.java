@@ -60,6 +60,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/TruMusic/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
+
                 .addFilter(authenticationFilter)
                 .addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

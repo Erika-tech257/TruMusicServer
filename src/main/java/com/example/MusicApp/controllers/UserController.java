@@ -43,7 +43,7 @@ public class UserController {
     //ResponseEntity is generic
 
     @PostMapping(value = "/login")
-    public ResponseEntity<User> login(@PathVariable String username){
+    public ResponseEntity<User> login(@RequestParam(name = "username") String username){
         return new ResponseEntity<>(userService.getUser(username), OK);
     }
 
@@ -113,6 +113,6 @@ public class UserController {
 @NoArgsConstructor
 class RoleToUser {
     private String username;
-    private Integer roleId; //maybe change to roleId
+    private Integer roleId;
 }
 
