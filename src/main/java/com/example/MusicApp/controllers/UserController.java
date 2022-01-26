@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,10 +43,13 @@ public class UserController {
     //ResponseEntity represents the whole HTTP response: status code, headers, and body
     //ResponseEntity is generic
 
+
     @PostMapping(value = "/login")
     public ResponseEntity<User> login(@RequestParam(name = "username") String username){
         return new ResponseEntity<>(userService.getUser(username), OK);
     }
+
+
 
     @GetMapping(path = "/users")
     public List <User> getAllUsers(){
