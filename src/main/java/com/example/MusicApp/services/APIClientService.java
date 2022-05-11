@@ -23,24 +23,5 @@ public class APIClientService {
       }
          return null;
    }
-//OkHttpClient client = new OkHttpClient();
-//
-//   Request request = new Request.Builder()
-//           .url("https://deezerdevs-deezer.p.rapidapi.com/artist/1")
-//           .get()
-//           .addHeader("X-RapidAPI-Host", "deezerdevs-deezer.p.rapidapi.com")
-//           .addHeader("X-RapidAPI-Key", "7e5a0303c8mshef9b3740265dcdcp13d713jsn012f72621fcc")
-//           .build();
-//
-//   Response response;
-//
-//   {
-//      try {
-//         response = client.newCall(request).execute();
-//         System.out.println(response);
-//      } catch (IOException e) {
-//         e.printStackTrace();
-//      }
-//   }
 
 }
