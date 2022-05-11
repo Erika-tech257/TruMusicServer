@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return roleRepository.save(role);
     }
 
-    //TODO://Role returning null
+    //TODO://Role returning null   fixed
     @Override
     public void addRoleToUser(String username, Integer roleId) {
         log.info("Adding role {} to user {}", roleId, username);

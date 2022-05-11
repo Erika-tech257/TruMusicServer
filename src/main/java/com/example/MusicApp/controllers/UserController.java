@@ -89,8 +89,8 @@ public class UserController {
         }
         final UserDetails userDetails = userServiceImpl.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtUtility.generateToken(userDetails);
-
         return new JwtResponse(token);
+
     }
 
 
@@ -113,44 +113,6 @@ public class UserController {
     public ResponseEntity<User>addRoleToUser(@RequestBody RoleToUser userRole){
         userService.addRoleToUser(userRole.getUsername(), userRole.getRoleId());
         return ResponseEntity.ok().build();
-    }
-
-
-    //TODO: CREATE UNTIL CLASS FOR TOKEN REDUCE REDUNDANCY
-
-    @GetMapping(path = "/refreshToken")
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response){
-        String authHeader = request.getHeader(AUTHORIZATION);
-        if(authHeader != null && authHeader.startsWith("Bearer ")) {
-            try {
-                String refreshToken = authHeader.substring("Bearer ".length());
-                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-                JWTVerifier verifier = JWT.require(algorithm).build();
-                DecodedJWT decodedJWT = verifier.verify(refreshToken);
-                String username = decodedJWT.getSubject();
-                User user = userService.getUser(username);
-                String accessToken = JWT.create()
-                        .withSubject(user.getUsername())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 10080 * 60 * 1000))
-                        .withIssuer(request.getRequestURL().toString())
-                        .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
-                        .sign(algorithm);
-                Map<String, String> tokens = new HashMap<>();
-                tokens.put("accessToken", accessToken);
-                tokens.put("refreshToken", refreshToken);
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-                Map<String, String> error = new HashMap<>();
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(), error);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            logger.trace("Error creating refresh token in UserController");
-            throw new RuntimeException("Refresh token is missing");
-
-        }
     }
 }
 //Want the username and roleName and pass it as an object

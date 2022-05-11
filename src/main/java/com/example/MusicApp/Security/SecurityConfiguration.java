@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtFilter jwtFilter;
 
+
     private final PasswordEncoder passwordEncoder;
 
     public SecurityConfiguration(UserServiceImpl userService, PasswordEncoder passwordEncoder) {
@@ -48,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/TruMusic/login")
+                .antMatchers("/TruMusic/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

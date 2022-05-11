@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Table
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "User")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

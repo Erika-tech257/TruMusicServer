@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 
 @Entity
-@Table
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "Role")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
