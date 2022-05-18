@@ -18,7 +18,7 @@ public class APIClientService {
       try (Response response = apiClient.newCall(req).execute()) {
          return Objects.requireNonNull(response.body()).string();
       } catch (IOException e) {
-         log.info("Exception for OKHttpClient in APICLientService");
+         log.info("Exception for OKHttpClient in APIClientService");
          e.printStackTrace();  //set up logger or aop logging instead of stacktrace
       }
          return null;

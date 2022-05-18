@@ -61,17 +61,17 @@ public class PlayList {
         this.description = description;
     }
 
-//    //many playlist to one user
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    User user;
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    //many playlist to one user
+    @ManyToOne(cascade = CascadeType.ALL)
+    User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 //
 //    @ManyToMany
 //    List<Track> trackList;
