@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return roleRepository.save(role);
     }
 
-    //TODO://Role returning null   fixed
     @Override
     public void addRoleToUser(String username, Integer roleId) {
         log.info("Adding role {} to user {}", roleId, username);
@@ -84,7 +83,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Fetching all users");
         return userRepository.findAll();
     }
-
 
     public void deleteUser(Integer userId) {
         boolean exists = userRepository.existsById(userId);

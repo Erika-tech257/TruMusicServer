@@ -1,14 +1,14 @@
 package com.example.MusicApp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
+
 
 @Entity
 @Table(name = "PlayList")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
-public class PlayList {
+public class PlayList implements Serializable {
 
     public PlayList() {
     }
@@ -18,13 +18,12 @@ public class PlayList {
         this.title = title;
     }
 
-//    public PlayList(Integer id, String title, String description, User user, List<Track> trackList) {
-//        this.id = id;
-//        this.title = title;
-//        this.description = description;
-//        this.user = user;
-//        this.trackList = trackList;
-//    }
+    public PlayList(Integer id, String title, String description, User user) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.user = user;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,14 +83,13 @@ public class PlayList {
 //        this.trackList = trackList;
 //    }
 //
-//    @Override
-//    public String toString() {
-//        return "PlayList{" +
-//                "id=" + id +
-//                ", title='" + title + '\'' +
-//                ", description='" + description + '\'' +
-//                ", user=" + user +
-//                ", trackList=" + trackList +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "PlayList{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
