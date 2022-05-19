@@ -6,6 +6,7 @@ import com.example.MusicApp.repositories.UserInfoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,9 @@ public class UserInfoServiceImpl implements UserInfoService{
     private final UserInfoService userInfoService;
     private final UserInfoRepository userInfoRepository;
 
+    //TODO:The dependencies of some of the beans in the application context form a cycle: used @Lazy to resolve issue for now
     @Autowired
-    public UserInfoServiceImpl(UserInfoService userInfoService, UserInfoRepository userInfoRepository) {
+    public UserInfoServiceImpl(@Lazy UserInfoService userInfoService, UserInfoRepository userInfoRepository) {
         this.userInfoService = userInfoService;
         this.userInfoRepository = userInfoRepository;
     }
@@ -32,8 +34,8 @@ public class UserInfoServiceImpl implements UserInfoService{
         return userInfoRepository.save(userInfo);
     }
 
-    @Override
-    public void addUserInfoToUser(UserInfo userInfo) {
-
-    }
+//    @Override
+//    public void addUserInfoToUser(UserInfo userInfo) {
+//
+//    }
 }
