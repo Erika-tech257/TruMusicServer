@@ -100,11 +100,13 @@ public class UserController {
 
     @PostMapping(path = "/user/register")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
+        logger.info("User registration {}", user);
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/role/save")
     public ResponseEntity<Role>saveRole(@RequestBody Role role){
+        logger.info("Saved Role {}", role);
         return new ResponseEntity<>(userService.saveRole(role), HttpStatus.CREATED);
     }
 
