@@ -32,7 +32,19 @@ public class User implements Serializable {
     @Column
     private String password;
 
+    //many roles to one user
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
+    //one userinfo to one user
+    @OneToOne(cascade = CascadeType.ALL)
+    UserInfo userInfo;
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 }

@@ -21,7 +21,7 @@ public class UserInfoServiceImpl implements UserInfoService{
     private final UserInfoService userInfoService;
     private final UserInfoRepository userInfoRepository;
 
-    //TODO:The dependencies of some of the beans in the application context form a cycle: used @Lazy to resolve issue for now
+    //TODO:The dependencies of some of the beans in the application context form a cycle: used @Lazy to resolve issue temporarily
     @Autowired
     public UserInfoServiceImpl(@Lazy UserInfoService userInfoService, UserInfoRepository userInfoRepository) {
         this.userInfoService = userInfoService;
