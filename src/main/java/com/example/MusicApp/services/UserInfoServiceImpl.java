@@ -34,8 +34,9 @@ public class UserInfoServiceImpl implements UserInfoService{
         return userInfoRepository.save(userInfo);
     }
 
-//    @Override
-//    public void addUserInfoToUser(UserInfo userInfo) {
-//
-//    }
+    @Override
+    public void addUserInfoToUser(UserInfo userInfo) {
+
+
+    }
 }

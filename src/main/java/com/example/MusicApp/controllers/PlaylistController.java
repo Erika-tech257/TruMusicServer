@@ -25,7 +25,7 @@ public class PlaylistController {
         this.playlistImpl = playlistImpl;
     }
 
-    @PostMapping(path = "/playlist/save")
+    @PostMapping(path = "/playlist/save", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayList> savePlaylist(@RequestBody PlayList playList) {
         return new ResponseEntity<>(playlistService.savePlaylist(playList), HttpStatus.CREATED);
     }
@@ -37,13 +37,13 @@ public class PlaylistController {
 //        return ResponseEntity.ok().build();
 //    }
 
-    @GetMapping(path = "/playlist/{title}")
+    @GetMapping(path = "/playlist/{title}", produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<PlayList> getPlayList(@PathVariable("title") String title) {
         return new ResponseEntity<>(playlistService.getPlayList(title), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(path = "/playlists")
+    @GetMapping(path = "/playlists", produces = APPLICATION_JSON_VALUE)
     public List<PlayList> getAllPlaylists() {
         return playlistService.getAllPlaylists();
     }

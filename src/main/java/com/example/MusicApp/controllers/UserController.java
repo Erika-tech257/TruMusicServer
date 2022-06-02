@@ -1,9 +1,6 @@
 package com.example.MusicApp.controllers;
-
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
+;
+import com.example.MusicApp.exceptions.ApiRequestException;
 import com.example.MusicApp.models.JwtRequest;
 import com.example.MusicApp.models.JwtResponse;
 import com.example.MusicApp.models.Role;
@@ -11,8 +8,6 @@ import com.example.MusicApp.models.User;
 import com.example.MusicApp.services.UserService;
 import com.example.MusicApp.services.UserServiceImpl;
 import com.example.MusicApp.utility.JWTUtility;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javassist.bytecode.stackmap.TypeData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,20 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 @Slf4j
@@ -74,7 +65,7 @@ public class UserController {
 
     //once authentication is done, need to create jwt token, then wrap token
     // in jwt response and send it back
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/login", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -92,25 +83,30 @@ public class UserController {
 
     }
 
-
-    @GetMapping(path = "/users")
-    public List <User> getAllUsers(){
-        return userService.getAllUsers();
+    @GetMapping(path = "/users", produces = APPLICATION_JSON_VALUE)
+    public List <User> getAllUsers() {
+        List<User> allUsers;
+        try {
+            allUsers = userService.getAllUsers();
+        } catch (ApiRequestException e) {
+            throw new ApiRequestException("Cannot get all users with custom exception");
+        }
+        return allUsers;
     }
 
-    @PostMapping(path = "/user/register")
+    @PostMapping(path = "/user/register", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         logger.info("User registration {}", user);
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/role/save")
+    @PostMapping(path = "/role/save", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<Role>saveRole(@RequestBody Role role){
         logger.info("Saved Role {}", role);
         return new ResponseEntity<>(userService.saveRole(role), HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/role/addToUser")
+    @PostMapping(path = "/role/addToUser", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<User>addRoleToUser(@RequestBody RoleToUser userRole){
         userService.addRoleToUser(userRole.getUsername(), userRole.getRoleId());
         return ResponseEntity.ok().build();
