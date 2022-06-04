@@ -18,7 +18,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 
     Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
-    private UserInfoService userInfoService;
+    private final UserInfoService userInfoService;
     private final UserInfoRepository userInfoRepository;
 
     //TODO:The dependencies of some of the beans in the application context form a cycle: used @Lazy to resolve issue temporarily
