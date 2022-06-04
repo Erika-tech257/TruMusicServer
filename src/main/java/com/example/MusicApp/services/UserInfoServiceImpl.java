@@ -28,11 +28,6 @@ public class UserInfoServiceImpl implements UserInfoService{
         this.userInfoRepository = userInfoRepository;
     }
 
-    //For UserServiceImplTest Class
-    public UserInfoServiceImpl(UserInfoRepository userInfoRepository) {
-        this.userInfoRepository = userInfoRepository;
-    }
-
     @Override
     public UserInfo saveUserInfo(UserInfo userInfo) {
         logger.info("UserInfo saved {}", userInfo);
