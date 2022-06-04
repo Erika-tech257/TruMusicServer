@@ -80,7 +80,6 @@ public class UserController {
         final UserDetails userDetails = userServiceImpl.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtUtility.generateToken(userDetails);
         return new JwtResponse(token);
-
     }
 
     @GetMapping(path = "/users", produces = APPLICATION_JSON_VALUE)

@@ -18,13 +18,18 @@ public class UserInfoServiceImpl implements UserInfoService{
 
     Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
-    private final UserInfoService userInfoService;
+    private UserInfoService userInfoService;
     private final UserInfoRepository userInfoRepository;
 
     //TODO:The dependencies of some of the beans in the application context form a cycle: used @Lazy to resolve issue temporarily
     @Autowired
     public UserInfoServiceImpl(@Lazy UserInfoService userInfoService, UserInfoRepository userInfoRepository) {
         this.userInfoService = userInfoService;
+        this.userInfoRepository = userInfoRepository;
+    }
+
+    //For UserServiceImplTest Class
+    public UserInfoServiceImpl(UserInfoRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
     }
 

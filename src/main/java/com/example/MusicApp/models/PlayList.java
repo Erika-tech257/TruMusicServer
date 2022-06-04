@@ -25,6 +25,12 @@ public class PlayList implements Serializable {
         this.user = user;
     }
 
+    public PlayList(Integer id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PlaylistID")
