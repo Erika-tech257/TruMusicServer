@@ -31,8 +31,8 @@ public class User implements Serializable {
 
     @Column(unique = true)
     @NotBlank(message = "Name is mandatory")
-    @Pattern(regexp = "^[a-zA-Z0-9]{6,12}$",
-            message = "Username must be 6 to 12 length with no special characters")
+    @Pattern(regexp = "^[a-zA-Z0-9]{5,12}$",
+            message = "Username must be 5 to 12 length with no special characters")
     private String username;
 
     @Column
