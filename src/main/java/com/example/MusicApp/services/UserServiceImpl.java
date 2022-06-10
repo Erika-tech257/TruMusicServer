@@ -73,9 +73,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getUser(String username) {
+    public void getUser(String username) {
         log.info("Fetching user {}", username);
-        return userRepository.findByUsername(username);
+        userRepository.findByUsername(username);
     }
 
     @Override
@@ -84,12 +84,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findAll();
     }
 
-    public void deleteUser(Integer userId) {
-        boolean exists = userRepository.existsById(userId);
+    //TODO://LINES 89-92 CAUSE AN ERROR WITH UNIT TESTING COMMENT OUT FOR NOW
+    public void deleteUser(Integer id){
+        boolean exists = userRepository.existsById(id);
         if(!exists) {
-            throw new IllegalStateException("User with id " + userId + " does not exist");
+            throw new IllegalStateException("User with id " + id + " does not exist");
         }
-        userRepository.deleteById(userId);
+        log.info("Deleting user {}", id);
+        userRepository.deleteById(id);
     }
 
 }

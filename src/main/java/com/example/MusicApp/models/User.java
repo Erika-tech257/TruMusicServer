@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,12 +26,19 @@ public class User implements Serializable {
     private Integer id;
 
     @Column
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
     @Column(unique = true)
+    @NotBlank(message = "Name is mandatory")
+    @Pattern(regexp = "^[a-zA-Z0-9]{6,12}$",
+            message = "Username must be 6 to 12 length with no special characters")
     private String username;
 
     @Column
+    @NotBlank(message = "Password is mandatory")
+    @Pattern(regexp = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])){4,12}$",
+            message = "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit")
     private String password;
 
     //many roles to one user

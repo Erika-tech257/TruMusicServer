@@ -92,7 +92,7 @@ public class UserController {
         }
         return allUsers;
     }
-
+//
     @PostMapping(path = "/user/register", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         logger.info("User registration {}", user);

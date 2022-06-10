@@ -16,7 +16,8 @@ import java.util.List;
         User saveUser(User user);
         Role saveRole(Role role);
         void addRoleToUser(String username, Integer roleId); //save role to user and attach role to user
-        User getUser(String username);
+        void getUser(String username);
+        void deleteUser(Integer id);
         List<User>getAllUsers();
 }
 

@@ -12,14 +12,17 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
     private UserServiceImpl underTest;
 
     @Mock
@@ -38,7 +41,6 @@ class UserServiceImplTest {
     void loadUserByUsername() {
     }
 
-    //TODO: GETTING NULLPOINTEREXCEPTION FIX LATER
     @Test
     void ShouldSaveUser() {
         User user = new User();
@@ -59,6 +61,7 @@ class UserServiceImplTest {
         assertThat(capturedUser).isEqualTo(user);
     }
 
+
     @Test
     void ShouldSaveRole() {
         Role role = new Role(1, "User");
@@ -66,14 +69,23 @@ class UserServiceImplTest {
         verify(roleRepository).save(role);
     }
 
-    @Test
-    @Disabled
-    void addRoleToUser() {
-    }
+    //TODO: Executes but throws a GETTING NULLPOINTEREXCEPTION
+//    @Test
+//    void shouldAddRoleToUser() {
+//        String username = "Lucky";
+//        Integer roleId = 2;
+//       underTest.addRoleToUser(username, roleId);
+//        User user = verify(userRepository).findByUsername(username);
+//        Role role = verify(roleRepository).findByRoleId(roleId);
+//        assertThat(user.getRoles().add(role)).isNotEqualTo();
+//    }
 
     @Test
-    @Disabled
-    void getUser() {
+    void shouldGetUser() {
+        String name = "Snoopy";
+        underTest.getUser(name);
+        verify(userRepository).findByUsername(name);
+
     }
 
     @Test
@@ -82,8 +94,12 @@ class UserServiceImplTest {
         verify(userRepository).findAll();
     }
 
-    @Test
-    @Disabled
-    void deleteUser() {
-    }
+
+    //TODO://FIND OUT HOW TO RUN TEST WITH IF STATEMENT
+//    @Test
+//    void deleteUser() {
+//        int id = 1;
+//        underTest.deleteUser(userRepository.getById());
+//        verify(userRepository).deleteById(id);
+//    }
 }
