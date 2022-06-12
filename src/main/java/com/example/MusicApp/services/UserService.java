@@ -15,6 +15,7 @@ import java.util.List;
     public interface UserService {
         User saveUser(User user);
         Role saveRole(Role role);
+        User getUserById(Integer id);
         void addRoleToUser(String username, Integer roleId); //save role to user and attach role to user
         void getUser(String username);
         void deleteUser(Integer id);

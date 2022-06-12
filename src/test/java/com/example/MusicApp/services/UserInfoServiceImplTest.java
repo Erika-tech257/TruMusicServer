@@ -20,7 +20,7 @@ class UserInfoServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        underTest = new UserInfoServiceImpl(userInfoService,userInfoRepository);
+        underTest = new UserInfoServiceImpl(userInfoService,userInfoRepository, userRepository);
     }
 
     @Test
