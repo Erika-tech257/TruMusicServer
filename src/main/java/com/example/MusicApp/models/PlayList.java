@@ -3,6 +3,7 @@ package com.example.MusicApp.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -77,18 +78,18 @@ public class PlayList implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-//
-//    @ManyToMany
-//    List<Track> trackList;
-//
-//    public List<Track> getTrackList() {
-//        return trackList;
-//    }
-//
-//    public void setTrackList(List<Track> trackList) {
-//        this.trackList = trackList;
-//    }
-//
+
+    @ManyToMany
+    List<Track> trackList;
+
+    public List<Track> getTrackList() {
+        return trackList;
+    }
+
+    public void setTrackList(List<Track> tracks) {
+        this.trackList = tracks;
+    }
+
     @Override
     public String toString() {
         return "PlayList{" +

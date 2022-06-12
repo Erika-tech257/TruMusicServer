@@ -42,4 +42,6 @@ public class UserInfo implements Serializable{
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
 }

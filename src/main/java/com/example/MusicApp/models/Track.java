@@ -18,13 +18,12 @@ public class Track {
         this.title = title;
     }
 
-//    public Track(Integer id, String title, List<PlayList> playListList, Album album, Artist artist) {
-//        this.id = id;
-//        this.title = title;
-//        this.playListList = playListList;
-//        this.album = album;
-//        this.artist = artist;
-//    }
+    public Track(Integer id, String title, Album album, Artist artist) {
+        this.id = id;
+        this.title = title;
+        this.album = album;
+        this.artist = artist;
+    }
 
     @Id
     @Column(name = "Track_Id")
@@ -49,50 +48,37 @@ public class Track {
         this.title = title;
     }
 
-//    //many tracks to many playlists
-//    @ManyToMany(mappedBy = "tracklist")
-//    private List<PlayList> playListList;
-//
-//    public List<PlayList> getPlayListList() {
-//        return playListList;
-//    }
-//
-//    public void setPlayListList(List<PlayList> playListList) {
-//        this.playListList = playListList;
-//    }
-//
-//    //many tracks to one album
-//    @ManyToOne
-//   Album album;
-//
-//    public Album getAlbum() {
-//        return album;
-//    }
-//
-//    public void setAlbum(Album album) {
-//        this.album = album;
-//    }
-//
-//    //many tracks to one artist
-//    @ManyToOne
-//    Artist artist;
-//
-//    public Artist getArtist() {
-//        return artist;
-//    }
-//
-//    public void setArtist(Artist artist) {
-//        this.artist = artist;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Track{" +
-//                "id=" + id +
-//                ", title='" + title + '\'' +
-//                ", playListList=" + playListList +
-//                ", album=" + album +
-//                ", artist=" + artist +
-//                '}';
-//    }
+    //many tracks to one album
+    @ManyToOne
+   Album album;
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    //many tracks to one artist
+    @ManyToOne
+    Artist artist;
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", album=" + album +
+                ", artist=" + artist +
+                '}';
+    }
 }

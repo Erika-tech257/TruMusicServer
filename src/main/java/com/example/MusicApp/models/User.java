@@ -46,7 +46,7 @@ public class User implements Serializable {
     private Collection<Role> roles = new ArrayList<>();
 
     //one userinfo to one user
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     UserInfo userInfo;
 
     public UserInfo getUserInfo() {
