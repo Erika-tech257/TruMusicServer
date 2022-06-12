@@ -2,6 +2,7 @@ package com.example.MusicApp.services;
 
 import com.example.MusicApp.models.UserInfo;
 import com.example.MusicApp.repositories.UserInfoRepository;
+import com.example.MusicApp.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,7 @@ class UserInfoServiceImplTest {
     private UserInfoRepository userInfoRepository;
     private UserInfoService userInfoService;
     private UserInfoServiceImpl underTest;
+    private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {

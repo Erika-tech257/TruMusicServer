@@ -1,5 +1,6 @@
 package com.example.MusicApp.services;
 
+import com.example.MusicApp.exceptions.UserInfoNotFoundException;
 import com.example.MusicApp.models.User;
 import com.example.MusicApp.models.UserInfo;
 import com.example.MusicApp.repositories.UserInfoRepository;
@@ -10,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+
 
 
 @Service
@@ -40,22 +41,31 @@ public class UserInfoServiceImpl implements UserInfoService{
 
     @Override
     public UserInfo getUserInfoById(Integer userinfo_id) {
+        logger.info("Getting UserInfo by Id {}", userinfo_id);
         return userInfoRepository.getById(userinfo_id);
     }
 
     @Override
     public void deleteUserInfo(UserInfo userInfo) {
+        logger.info("Deleting this user's info {}", userInfo);
         userInfoRepository.delete(userInfo);
     }
 
     @Override
     public List<UserInfo> listOfUserInfos() {
+        logger.info("List of User's info");
         return userInfoRepository.findAll();
     }
 
-    //TODO://REFACTOR CODE BY ADDING AN EXCEPTION AND A TRY/CATCH BLOCK
     @Override
-    public User getUserByUserInfo(UserInfo userInfo) {
-        return userInfoRepository.findByUserInfo(userInfo);
+    public User getUserByUserInfo(UserInfo userInfo){
+        User user = null;
+        try {
+            user = userInfoRepository.findUserInfoByUser(userInfo);
+            logger.info("This user is associated with this userinfo {}", userInfo);
+        }catch (UserInfoNotFoundException e){
+            throw new UserInfoNotFoundException(e.getMessage());
+        }
+        return user;
     }
 }
