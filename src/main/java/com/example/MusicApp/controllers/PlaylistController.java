@@ -17,9 +17,9 @@ import java.util.List;
 public class PlaylistController {
 
     private final PlaylistService playlistService;
-    @Autowired
     private final PlaylistServiceImpl playlistImpl;
 
+    @Autowired
     public PlaylistController(PlaylistService playlistService, UserService userService, PlaylistServiceImpl playlistImpl) {
         this.playlistService = playlistService;
         this.playlistImpl = playlistImpl;
@@ -44,6 +44,7 @@ public class PlaylistController {
     }
 
     @GetMapping(path = "/playlists", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<PlayList> getAllPlaylists() {
         return playlistService.getAllPlaylists();
     }

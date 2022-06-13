@@ -36,17 +36,13 @@ public class UserController {
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
+
     private JWTUtility jwtUtility;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
-
     private final UserService userService;
-
-    @Autowired
     private UserServiceImpl userServiceImpl;
 
+    @Autowired
     public UserController(JWTUtility jwtUtility, AuthenticationManager authenticationManager, UserService userService) {
         this.jwtUtility = jwtUtility;
         this.authenticationManager = authenticationManager;

@@ -1,10 +1,15 @@
 package com.example.MusicApp.services;
 
+import com.example.MusicApp.exceptions.UserInfoNotFoundException;
 import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
+import com.example.MusicApp.models.UserInfo;
 import com.example.MusicApp.repositories.RoleRepository;
+import com.example.MusicApp.repositories.UserInfoRepository;
 import com.example.MusicApp.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,22 +21,27 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
+    Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserInfoRepository userInfoRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+                           RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserInfoRepository userInfoRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userInfoRepository = userInfoRepository;
     }
 
     //userDetails takes in username, password and authorities
@@ -85,8 +95,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getUserById(Integer id) {
-        return userRepository.getById(id);
+    public Optional<User> getUserById(Integer id) {
+        return userRepository.findById(id);
     }
 
     //TODO://LINES 89-92 CAUSE AN ERROR WITH UNIT TESTING COMMENT OUT FOR NOW
@@ -97,6 +107,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         log.info("Deleting user {}", id);
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User getUserByUserInfo(UserInfo userInfo){
+        User user = null;
+        try {
+            user = userInfoRepository.findUserInfoByUser(userInfo);
+            logger.info("This user is associated with this userinfo {}", userInfo);
+        }catch (UserInfoNotFoundException e){
+            throw new UserInfoNotFoundException(e.getMessage());
+        }
+        return user;
     }
 
 }

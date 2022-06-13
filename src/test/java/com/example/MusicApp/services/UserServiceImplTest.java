@@ -3,6 +3,7 @@ package com.example.MusicApp.services;
 import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
 import com.example.MusicApp.repositories.RoleRepository;
+import com.example.MusicApp.repositories.UserInfoRepository;
 import com.example.MusicApp.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -31,9 +32,12 @@ class UserServiceImplTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    @Mock
+    private UserInfoRepository userInfoRepository;
+
     @BeforeEach
     void setUp() {
-        underTest = new UserServiceImpl(userRepository, roleRepository, passwordEncoder);
+        underTest = new UserServiceImpl(userRepository, roleRepository, passwordEncoder, userInfoRepository);
     }
 
     @Test

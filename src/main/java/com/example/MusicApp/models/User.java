@@ -45,8 +45,7 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
-    //one userinfo to one user
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "user")
     UserInfo userInfo;
 
     public UserInfo getUserInfo() {

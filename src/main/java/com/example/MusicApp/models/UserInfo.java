@@ -3,7 +3,6 @@ package com.example.MusicApp.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -33,6 +32,18 @@ public class UserInfo implements Serializable{
     @Column
     private String email;
 
+    //one user to one userInfo
+    @OneToOne(cascade = CascadeType.REMOVE)
+    User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -42,6 +53,4 @@ public class UserInfo implements Serializable{
                 ", email='" + email + '\'' +
                 '}';
     }
-
-
 }
