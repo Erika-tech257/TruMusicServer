@@ -1,7 +1,8 @@
-package com.example.MusicApp.services;
+package com.example.MusicApp.services.impl;
 
 import com.example.MusicApp.models.UserInfo;
 import com.example.MusicApp.repositories.UserInfoRepository;
+import com.example.MusicApp.services.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserInfoServiceImpl implements UserInfoService{
+public class UserInfoServiceImpl implements UserInfoService {
 
     Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 

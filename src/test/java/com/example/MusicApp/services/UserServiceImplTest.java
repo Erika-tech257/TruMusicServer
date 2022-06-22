@@ -5,6 +5,7 @@ import com.example.MusicApp.models.User;
 import com.example.MusicApp.repositories.RoleRepository;
 import com.example.MusicApp.repositories.UserInfoRepository;
 import com.example.MusicApp.repositories.UserRepository;
+import com.example.MusicApp.services.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,24 +68,24 @@ class UserServiceImplTest {
         assertThat(capturedUser).isEqualTo(user);
     }
 
-
     @Test
-    void ShouldSaveRole() {
+    void shouldSaveRole() {
         Role role = new Role(1, "User");
         underTest.saveRole(role);
         verify(roleRepository).save(role);
     }
 
-    //TODO: Executes but throws a GETTING NULLPOINTEREXCEPTION
-//    @Test
-//    void shouldAddRoleToUser() {
-//        String username = "Lucky";
-//        Integer roleId = 2;
-//       underTest.addRoleToUser(username, roleId);
-//        User user = verify(userRepository).findByUsername(username);
-//        Role role = verify(roleRepository).findByRoleId(roleId);
-//        assertThat(user.getRoles().add(role)).isNotEqualTo();
-//    }
+//    //TODO: Executes but throws a GETTING NULLPOINTEREXCEPTION
+    @Test
+    @Disabled
+    void shouldAddRoleToUser(){
+        String username = "Lucky";
+        Integer roleId = 2;
+       underTest.addRoleToUser(username, roleId);
+        User user = verify(userRepository).findByUsername(username);
+        Role role = verify(roleRepository).findByRoleId(roleId);
+        assertThat(user.getRoles().add(role)).isNotNull();
+    }
 
     @Test
     void shouldGetUser() {
@@ -98,12 +101,14 @@ class UserServiceImplTest {
         verify(userRepository).findAll();
     }
 
-
-    //TODO://FIND OUT HOW TO RUN TEST WITH IF STATEMENT
-//    @Test
-//    void deleteUser() {
-//        int id = 1;
-//        underTest.deleteUser(userRepository.getById());
-//        verify(userRepository).deleteById(id);
-//    }
+    @Test
+    void deleteUser() {
+        int id = 2;
+        boolean exists = userRepository.existsById(id);
+        given(exists).willReturn(false);
+        assertThatThrownBy(() -> underTest.deleteUser(id))
+                .isInstanceOf(IllegalStateException.class)
+                        .hasMessage("User with id " + id + " does not exist");
+       userRepository.deleteById(id);
+    }
 }

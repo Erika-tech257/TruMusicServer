@@ -2,7 +2,7 @@ package com.example.MusicApp.controllers;
 
 import com.example.MusicApp.models.UserInfo;
 import com.example.MusicApp.services.UserInfoService;
-import com.example.MusicApp.services.UserInfoServiceImpl;
+import com.example.MusicApp.services.impl.UserInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

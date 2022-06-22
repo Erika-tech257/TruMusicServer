@@ -2,7 +2,7 @@ package com.example.MusicApp.controllers;
 
 import com.example.MusicApp.models.PlayList;
 import com.example.MusicApp.services.PlaylistService;
-import com.example.MusicApp.services.PlaylistServiceImpl;
+import com.example.MusicApp.services.impl.PlaylistServiceImpl;
 import com.example.MusicApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

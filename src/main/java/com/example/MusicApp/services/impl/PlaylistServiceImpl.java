@@ -1,8 +1,9 @@
-package com.example.MusicApp.services;
+package com.example.MusicApp.services.impl;
 
 import com.example.MusicApp.models.PlayList;
 import com.example.MusicApp.repositories.PlaylistRepository;
 import com.example.MusicApp.repositories.UserRepository;
+import com.example.MusicApp.services.PlaylistService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

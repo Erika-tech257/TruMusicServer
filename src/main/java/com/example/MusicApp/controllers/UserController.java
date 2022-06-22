@@ -6,7 +6,7 @@ import com.example.MusicApp.models.JwtResponse;
 import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
 import com.example.MusicApp.services.UserService;
-import com.example.MusicApp.services.UserServiceImpl;
+import com.example.MusicApp.services.impl.UserServiceImpl;
 import com.example.MusicApp.utility.JWTUtility;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

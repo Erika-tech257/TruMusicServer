@@ -1,7 +1,7 @@
 package com.example.MusicApp.filters;
 
 
-import com.example.MusicApp.services.UserServiceImpl;
+import com.example.MusicApp.services.impl.UserServiceImpl;
 import com.example.MusicApp.utility.JWTUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

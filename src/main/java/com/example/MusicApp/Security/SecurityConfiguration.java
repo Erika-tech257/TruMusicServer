@@ -1,7 +1,7 @@
 package com.example.MusicApp.Security;
 
 import com.example.MusicApp.filters.JwtFilter;
-import com.example.MusicApp.services.UserServiceImpl;
+import com.example.MusicApp.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

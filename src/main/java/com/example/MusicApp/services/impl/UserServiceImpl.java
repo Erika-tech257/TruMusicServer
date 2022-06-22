@@ -1,4 +1,4 @@
-package com.example.MusicApp.services;
+package com.example.MusicApp.services.impl;
 
 import com.example.MusicApp.exceptions.UserInfoNotFoundException;
 import com.example.MusicApp.models.Role;
@@ -7,6 +7,7 @@ import com.example.MusicApp.models.UserInfo;
 import com.example.MusicApp.repositories.RoleRepository;
 import com.example.MusicApp.repositories.UserInfoRepository;
 import com.example.MusicApp.repositories.UserRepository;
+import com.example.MusicApp.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
