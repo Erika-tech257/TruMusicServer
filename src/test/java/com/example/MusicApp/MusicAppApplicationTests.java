@@ -3,8 +3,10 @@ package com.example.MusicApp;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
+
 //@SpringBootTest
-class MusicAppApplicationTests {
+public class MusicAppApplicationTests {
 
 	@Test
 	void contextLoads() {

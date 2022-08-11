@@ -100,7 +100,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findById(id);
     }
 
-    //TODO://LINES 89-92 CAUSE AN ERROR WITH UNIT TESTING COMMENT OUT FOR NOW
     public void deleteUser(Integer id){
         boolean exists = userRepository.existsById(id);
         if(!exists) {
