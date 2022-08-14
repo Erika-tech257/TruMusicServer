@@ -79,6 +79,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/users", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List <User> getAllUsers() {
         List<User> allUsers;
         try {

@@ -15,6 +15,7 @@ import java.util.Collection;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
 @Getter
 @Setter
