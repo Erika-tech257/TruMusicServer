@@ -1,5 +1,6 @@
 package com.example.MusicApp.controllers;
 
+import com.example.MusicApp.dto.UserRoleDto;
 import com.example.MusicApp.mapper.CustomMapper;
 import com.example.MusicApp.models.*;
 import com.example.MusicApp.repositories.RoleRepository;
@@ -85,8 +86,6 @@ public class UserController {
         userService.getUser(username);
     }
 
-    @GetMapping(path = "/userInfo/")
-
     @PostMapping(path = "/user/register", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         logger.info("User registration {}", user);
@@ -107,6 +106,13 @@ public class UserController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List <Role> getAll(){
         return userServiceImpl.getAllRoles();
+    }
+
+    @GetMapping(path = "/allUsers", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseBody
+    public List<UserRoleDto>getAllUsers(){
+        return userServiceImpl.getAllUsers();
     }
 
     @PostMapping(path = "/update", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)

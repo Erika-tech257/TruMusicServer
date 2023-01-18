@@ -1,5 +1,6 @@
 package com.example.MusicApp.services.impl;
 
+import com.example.MusicApp.dto.UserRoleDto;
 import com.example.MusicApp.exceptions.UserInfoNotFoundException;
 import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -121,4 +123,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return user;
     }
 
+    public List <UserRoleDto> getAllUsers(){
+        return userRepository.findAll()
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private UserRoleDto convertEntityToDto(User user){
+        UserRoleDto userRoleDto = new UserRoleDto();
+        userRoleDto.setUsername(user.getUsername());
+        userRoleDto.setName(user.getRoles().toString());
+        return userRoleDto;
+    }
 }

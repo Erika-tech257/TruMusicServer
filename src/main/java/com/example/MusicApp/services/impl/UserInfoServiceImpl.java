@@ -72,14 +72,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         } else{
             throw new UserInfoNotFoundException("UserInfo not found");
         }
-
     }
 
     public Optional <UserInfoDto> getUserInfoByUserId(Integer user_id) {
         return userInfoRepository.findById(user_id)
                 .stream().map(this::convertToDto)
                 .findFirst();
-
     }
     /**
      * Conversion for UserInfo entity to UserInfoDto
@@ -88,6 +86,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      */
     private UserInfoDto convertToDto (UserInfo userInfo){
         UserInfoDto userInfoDto = new UserInfoDto();
+        userInfoDto.setUsername(userInfo.getUser().getUsername());
         userInfoDto.setFirstname(userInfo.getFirstname());
         userInfoDto.setLastname(userInfo.getLastname());
         userInfoDto.setEmail(userInfo.getEmail());
@@ -95,7 +94,5 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfoDto.setLastUpdate(stamp);
         return userInfoDto;
     }
-
-
 
 }
