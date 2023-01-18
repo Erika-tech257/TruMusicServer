@@ -32,9 +32,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserInfoRepository userInfoRepository;
+    private final RoleRepository roleRepository;
+
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
       User user = userRepository.findByUsername(username);
         if( user == null) {
-            throw new UsernameNotFoundException("Username not found ");
+            throw new UsernameNotFoundException("Username not found");
         } else {
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             user.getRoles().forEach(role -> {
@@ -89,10 +90,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.findByUsername(username);
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        log.info("Fetching all users");
-        return userRepository.findAll();
+    public List<Role> getAllRoles() {
+        log.info("Fetching all roles");
+        return roleRepository.findAll();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User getUserByUserInfo(UserInfo userInfo){
-        User user = null;
+        User user;
         try {
             user = userInfoRepository.findUserInfoByUser(userInfo);
             logger.info("This user is associated with this userinfo {}", userInfo);

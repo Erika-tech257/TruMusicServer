@@ -2,7 +2,6 @@ package com.example.MusicApp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -39,7 +38,7 @@ public class User implements Serializable {
     @Column
     @NotBlank(message = "Password is mandatory")
     @Pattern(regexp = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])){4,12}$",
-            message = "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit")
+            message = "Password must contain atLeast 1 uppercase, 1 lowercase, 1 special character and 1 digit")
     private String password;
 
     //many roles to one user
@@ -56,4 +55,5 @@ public class User implements Serializable {
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
+
 }

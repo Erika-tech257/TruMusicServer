@@ -89,17 +89,17 @@ class UserServiceImplTest {
     }
 
     @Test
-    void shouldGetUser() {
+    void shouldGetUserByName() {
         String name = "Snoopy";
         underTest.getUser(name);
         verify(userRepository).findByUsername(name);
-
     }
 
     @Test
-    void canGetAllUsers() {
-        underTest.getAllUsers();
-        verify(userRepository).findAll();
+    void itShouldGetUserById(){
+        Integer id = 1;
+        underTest.getUserById(id);
+        verify(userRepository).findById(id);
     }
 
     @Test
@@ -107,9 +107,10 @@ class UserServiceImplTest {
         int id = 2;
         boolean exists = userRepository.existsById(id);
         given(exists).willReturn(false);
+        userRepository.deleteById(id);
         assertThatThrownBy(() -> underTest.deleteUser(id))
                 .isInstanceOf(IllegalStateException.class)
                         .hasMessage("User with id " + id + " does not exist");
-       userRepository.deleteById(id);
+
     }
 }

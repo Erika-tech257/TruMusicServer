@@ -2,16 +2,20 @@ package com.example.MusicApp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 
 @Entity
+@Table(name = "userInfo")
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 public class UserInfo implements Serializable{
 
@@ -31,6 +35,9 @@ public class UserInfo implements Serializable{
 
     @Column
     private String email;
+
+    @Column
+    private Timestamp lastUpdate;
 
     //one user to one userInfo
     @OneToOne(cascade = CascadeType.REMOVE)
@@ -53,4 +60,6 @@ public class UserInfo implements Serializable{
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
 }

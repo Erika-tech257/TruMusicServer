@@ -21,7 +21,6 @@ import java.util.Optional;
         void addRoleToUser(String username, Integer roleId); //save role to user and attach role to user
         void getUser(String username);
         void deleteUser(Integer id);
-        List<User>getAllUsers();
         User getUserByUserInfo(UserInfo userInfo);
 }
 

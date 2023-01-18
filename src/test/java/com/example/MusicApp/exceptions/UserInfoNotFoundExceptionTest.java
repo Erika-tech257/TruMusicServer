@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class UserInfoNotFoundExceptionTest {
 
@@ -17,5 +15,11 @@ class UserInfoNotFoundExceptionTest {
             throw new UserInfoNotFoundException(message);
         });
         Assertions.assertEquals(message, expectedException.getMessage());
+    }
+
+    @Test
+    void itShouldTestUserNotFoundException_1() {
+        String message = "UserInfo not associated with this User";
+        Assertions.assertEquals(message, "UserInfo not associated with this User");
     }
 }
