@@ -2,7 +2,6 @@ package com.example.MusicApp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 

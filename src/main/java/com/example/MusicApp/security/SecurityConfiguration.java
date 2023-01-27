@@ -1,4 +1,4 @@
-package com.example.MusicApp.Security;
+package com.example.MusicApp.security;
 
 import com.example.MusicApp.filters.JwtFilter;
 import com.example.MusicApp.services.impl.UserServiceImpl;

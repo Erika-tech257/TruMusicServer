@@ -28,7 +28,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     //whenever get token pass the authorization header
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, ServletException {
         String authorization = request.getHeader("Authorization");
         String token = null;
         String username = null;

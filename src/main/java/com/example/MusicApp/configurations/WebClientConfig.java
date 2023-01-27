@@ -17,7 +17,8 @@ public class WebClientConfig {
 
     @Bean
     public WebClient createWebClient() {
-        return WebClient.builder().baseUrl("http://localhost:8080")
+        return WebClient.builder()
+                .baseUrl("https://deezerdevs-deezer.p.rapidapi.com")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }

@@ -1,18 +1,18 @@
 package com.example.MusicApp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
+import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Table(name = "Artist")
 @Entity
 @Builder
 @ToString
+@Data
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
 public class Artist implements Serializable {
 
@@ -25,7 +25,7 @@ public class Artist implements Serializable {
    private String name;
 
    @Column(name = "ArtistImg")
-   private String artist_img;
+   private String picture_medium;
 
    public Artist() {
    }
@@ -36,10 +36,10 @@ public class Artist implements Serializable {
       this.name = name;
    }
 
-   public Artist(Integer id, String name, String artist_img) {
+   public Artist(Integer id, String name, String picture_medium) {
       this.id = id;
       this.name = name;
-      this.artist_img = artist_img;
+      this.picture_medium = picture_medium;
    }
 
 
@@ -53,29 +53,6 @@ public class Artist implements Serializable {
 //   }
 
 
-   public Integer getId() {
-      return id;
-   }
-
-   public void setId(Integer id) {
-      this.id = id;
-   }
-
-   public String getName() {
-      return name;
-   }
-
-   public void setName(String name) {
-      this.name = name;
-   }
-
-   public String getArtist_img() {
-      return artist_img;
-   }
-
-   public void setArtist_img(String artist_img) {
-      this.artist_img = artist_img;
-   }
 
    //   @OneToMany(mappedBy = "Artist")
 //   @JsonIgnore

@@ -1,15 +1,10 @@
 package com.example.MusicApp.models;
 
 import com.example.MusicApp.utility.CustomDateDeserializer;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.Builder;
-import lombok.ToString;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.*;
+
 
 //@Table(name = "Event")
 //@Entity
