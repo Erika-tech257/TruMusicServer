@@ -1,7 +1,6 @@
 package com.example.MusicApp.controllers;
 
 import com.example.MusicApp.models.Artist;
-import com.example.MusicApp.repositories.ArtistRepository;
 import com.example.MusicApp.services.ArtistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +18,11 @@ public class ArtistController {
     Logger logger = LoggerFactory.getLogger(ArtistController.class);
     private final ArtistService artistService;
 
+    /**
+     * Return artist that user searches for
+     * @param id
+     * @return
+     */
 
     @GetMapping("/artist/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

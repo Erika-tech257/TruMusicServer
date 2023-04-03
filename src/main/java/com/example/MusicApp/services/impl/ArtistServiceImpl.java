@@ -27,6 +27,10 @@ public class ArtistServiceImpl implements ArtistService {
                 .header( "X-RapidAPI-Host", "deezerdevs-deezer.p.rapidapi.com")
                 .retrieve()
                 .bodyToMono(Artist.class)
+                .retry(3)
                 .block();
     }
+
+    // artist is linked to album, where artist_id is on the album table, want to join both tables
+    // tracks is linked to album, where album_album_id is on the track table, so when you search for album a list of tracks is displayed
 }
