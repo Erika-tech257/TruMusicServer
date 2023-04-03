@@ -1,28 +1,37 @@
 package com.example.MusicApp.deezerapi;
 
-import com.example.MusicApp.models.Artist;
+import com.example.MusicApp.dto.SearchDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
-import java.util.*;
 
-public class ArtistsSearch {
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class SearchDeezer {
 
-    /**
-     * may want to use a for loop instead
-     * @param id
-     */
+private final WebClient webClient;
+private SearchDto searchDto;
+private final ObjectMapper mapper;
 
-    public void search(String id) {
-//        APIClientService.get("https://www.deezer.com/artist/" + id);
-        int count;
-        Artist artist = new Artist();
-        List<Artist> artistList = new ArrayList<>();
-        for (int i = 0; i <id.length(); i++) {
-//            System.out.println(id[i]);
-        }
+    public SearchDto searchArtistByName(String q) throws IOException {
+
+
+        return webClient
+                .get()
+                .uri("/search?" + q)
+                .header("X-RapidAPI-Key", "7e5a0303c8mshef9b3740265dcdcp13d713jsn012f72621fcc")
+                .header( "X-RapidAPI-Host", "deezerdevs-deezer.p.rapidapi.com")
+                .retrieve()
+                .bodyToMono(SearchDto.class)
+                .block();
     }
+
+
 
 //    public void artSearch() throws IOException {
 //

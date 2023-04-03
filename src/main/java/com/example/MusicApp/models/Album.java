@@ -22,14 +22,13 @@ public class Album implements Serializable {
         this.title = title;
     }
 
-//    public Album(Integer id, String title, String releaseDate, String album_img, Artist artist, List<Track> tracks) {
-//        this.id = id;
-//        this.title = title;
-//        this.releaseDate = releaseDate;
-//        this.album_img = album_img;
-//        this.artist = artist;
-//        this.tracks = tracks;
-//    }
+    public Album(Integer id, String title, String releaseDate, String album_img, Artist artist) {
+        this.id = id;
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.album_img = album_img;
+        this.artist = artist;
+    }
 
     @Id
     @Column(name = "AlbumId")
@@ -76,39 +75,26 @@ public class Album implements Serializable {
         this.album_img = album_img;
     }
 
-//    @ManyToOne
-//    @JoinColumn(name = "ArtistId")
-//    private Artist artist;
-//
-//    public Artist getArtist() {
-//        return artist;
-//    }
-//
-//    public void setArtist(Artist artist) {
-//        this.artist = artist;
-//    }
-//
-//    @OneToMany
-//    @JoinColumn(name = "TrackID")
-//    private List<Track> tracks;
-//
-//    public List<Track> getTracks() {
-//        return tracks;
-//    }
-//
-//    public void setTracks(List<Track> tracks) {
-//        this.tracks = tracks;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Album{" +
-//                "id=" + id +
-//                ", title='" + title + '\'' +
-//                ", releaseDate='" + releaseDate + '\'' +
-//                ", album_img='" + album_img + '\'' +
-//                ", artist=" + artist +
-//                ", tracks=" + tracks +
-//                '}';
-//    }
+    @ManyToOne
+    @JoinColumn(name = "ArtistId")
+    private Artist artist;
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", album_img='" + album_img + '\'' +
+                ", artist=" + artist +
+                '}';
+    }
 }

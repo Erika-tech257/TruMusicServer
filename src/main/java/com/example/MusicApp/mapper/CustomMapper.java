@@ -2,9 +2,10 @@ package com.example.MusicApp.mapper;
 
 import com.example.MusicApp.models.Role;
 import com.example.MusicApp.models.User;
-import com.example.MusicApp.models.UserInfo;
-import org.apache.ibatis.annotations.*;
-
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
